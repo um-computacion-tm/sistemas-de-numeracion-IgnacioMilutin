@@ -1,32 +1,29 @@
 import unittest
-
 def decimal2binario(decimal):
     bin=''
-    while decimal//2 != 1:
+    while decimal//2 > 1:
         bin=bin + str(decimal%2)
-        decimal=decimal//2 
-
-    bin + '1'
+        decimal=int(decimal//2)
+    bin=bin + str(decimal%2)
+    decimal=int(decimal//2)
+    bin = bin +'1'
     if len(bin)%4==3:
-        bin=bin + '000'
+        bin=bin + str(0)
     elif len(bin)%4==2:
-        bin=bin+'00'
+        bin=bin+str(00)
     elif len(bin)%4==1:
-        bin=bin+'0'
-    
+        bin=bin+str(000)
+    else: bin
     return bin[::-1]
 
 def binario2decimal(binario):
-    dicbin=[]
-    pass
-
-
-class TestNumeracion(unittest.TestCase):
-    def test_binario2decimal(self):
-        self.assertEqual(binario2decimal('01011100'),92)
-    def test_decimal2binario(self):
-        self.assertEqual(decimal2binario(97), '01100001')
-
-if __name__=='__main__':
-    unittest.main()
-    
+    lista=list(binario[::-1])
+    for j in range(len(lista)):
+        lista[j]=int(lista[j])
+    exp=0
+    dec=0
+    for i in lista:
+        num=i*(2**exp)
+        dec+=num
+        exp+=1
+    return dec
